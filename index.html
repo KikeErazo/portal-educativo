@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Enrique Erazo" />
+  <title>Portal Educativo | Educación Ambiental, SST y Otras — Enrique Erazo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Barra de navegación superior -->
+  <header class="navbar">
+    <div class="navbar-container">
+      <div class="brand">
+        <button id="toggleSidebarBtn" class="menu-toggle" aria-label="Abrir tabla de contenidos" title="Tabla de contenidos">
+          ☰
+        </button>
+        <div class="brand-text">
+          <span class="brand-badge">Aula Interactiva · Enrique Erazo</span>
+          <h1>Educación Ambiental y SST</h1>
+        </div>
+      </div>
+
+      <nav class="top-nav" aria-label="Navegación principal">
+        <a href="#inicio" class="nav-link active" data-filter="all">Inicio (<span id="navTotalCount">26</span>)</a>
+        <a href="#seccion-ambiental" class="nav-link" data-filter="Ambiental">🌿 Ambiental (<span id="navAmbCount">10</span>)</a>
+        <a href="#seccion-sst" class="nav-link" data-filter="SST">🦺 SST (<span id="navSstCount">7</span>)</a>
+        <a href="#seccion-otras" class="nav-link" data-filter="Otras">🧩 Otras (<span id="navOtrasCount">9</span>)</a>
+      </nav>
+
+      <div class="progress-pill" title="Actividades marcadas como completadas">
+        <span>Progreso:</span>
+        <strong id="progressCount">0 / 26</strong>
+      </div>
+    </div>
+  </header>
+
+  <!-- Fondo oscuro para menú lateral en celulares y tabletas -->
+  <div id="sidebarOverlay" class="sidebar-overlay hidden"></div>
+
+  <div class="layout-wrapper">
+    <!-- Tabla de Contenidos / Menú Lateral -->
+    <aside id="sidebar" class="sidebar" aria-label="Tabla de contenidos">
+      <div class="sidebar-header">
+        <h2>📑 Tabla de Contenidos</h2>
+        <button id="closeSidebarBtn" class="close-sidebar" aria-label="Cerrar menú">✕</button>
+      </div>
+
+      <div class="sidebar-progress">
+        <div class="progress-bar-bg">
+          <div id="progressBarFill" class="progress-bar-fill" style="width: 0%"></div>
+        </div>
+        <small id="progressPercent">0% completado</small>
+      </div>
+
+      <div class="toc-group">
+        <h3>🌿 Educación Ambiental (<span id="tocAmbCount">10</span>)</h3>
+        <ul id="tocAmbiental" class="toc-list"></ul>
+      </div>
+
+      <div class="toc-group">
+        <h3>🦺 Seguridad y Salud SST (<span id="tocSstCount">7</span>)</h3>
+        <ul id="tocSst" class="toc-list"></ul>
+      </div>
+
+      <div class="toc-group">
+        <h3>🧩 Otras / GitHub (<span id="tocOtrasCount">9</span>)</h3>
+        <ul id="tocOtras" class="toc-list"></ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <button id="resetProgressBtn" class="btn-reset">Reiniciar progreso</button>
+      </div>
+    </aside>
+
+    <!-- Contenido Principal -->
+    <main id="inicio" class="main-content">
+      <!-- Hero / Presentación -->
+      <section class="hero">
+        <div class="hero-content">
+          <h2>Centro de Recursos y Actividades Interactivas</h2>
+          <p>
+            Explora los módulos formativos en <strong>Gestión Ambiental</strong>,
+            <strong>Seguridad y Salud en el Trabajo (SST)</strong> y la colección de
+            <strong>Otras Aplicaciones en GitHub Pages</strong>. Adaptado para celulares,
+            tabletas, portátiles y televisores.
+          </p>
+        </div>
+
+        <!-- Controles de búsqueda y filtrado -->
+        <div class="controls-bar">
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Buscar actividad (ej. Bhopal, residuos, calculadora, ahorcado, DANE, SENA...)"
+              aria-label="Buscar actividad"
+            />
+          </div>
+
+          <div class="filter-buttons" role="group" aria-label="Filtrar por categoría">
+            <button class="filter-btn active" data-category="all">Todas (<span id="btnAllCount">26</span>)</button>
+            <button class="filter-btn" data-category="Ambiental">🌿 Ambiental (<span id="btnAmbCount">10</span>)</button>
+            <button class="filter-btn" data-category="SST">🦺 SST (<span id="btnSstCount">7</span>)</button>
+            <button class="filter-btn" data-category="Otras">🧩 Otras / GitHub (<span id="btnOtrasCount">9</span>)</button>
+            <button class="filter-btn" data-category="Simulador">🎮 Juegos / Simuladores</button>
+            <button class="filter-btn" data-category="Caso">📋 Estudios de Caso</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Estado sin resultados -->
+      <div id="emptyState" class="empty-state hidden">
+        <p>No se encontraron actividades que coincidan con tu búsqueda.</p>
+        <button id="clearFiltersBtn" class="btn-primary">Mostrar todas las actividades</button>
+      </div>
+
+      <!-- Sección Ambiental -->
+      <section id="seccion-ambiental" class="category-section">
+        <div class="section-header ambiental-header">
+          <div>
+            <span class="section-tag">Módulo 1 · Carpeta /Ambiental y GitHub Pages</span>
+            <h2>🌿 Educación y Gestión Ambiental</h2>
+          </div>
+          <span class="counter-badge" id="countAmbiental">10 actividades</span>
+        </div>
+        <div id="gridAmbiental" class="cards-grid"></div>
+      </section>
+
+      <!-- Sección SST -->
+      <section id="seccion-sst" class="category-section">
+        <div class="section-header sst-header">
+          <div>
+            <span class="section-tag">Módulo 2 · Carpeta /SST</span>
+            <h2>🦺 Seguridad y Salud en el Trabajo (SST)</h2>
+          </div>
+          <span class="counter-badge" id="countSst">7 actividades</span>
+        </div>
+        <div id="gridSst" class="cards-grid"></div>
+      </section>
+
+      <!-- Sección Otras (GitHub Pages) -->
+      <section id="seccion-otras" class="category-section">
+        <div class="section-header otras-header">
+          <div>
+            <span class="section-tag">Módulo 3 · Proyectos Web en kikeerazo.github.io</span>
+            <h2>🧩 Otras Actividades y Aplicaciones (GitHub)</h2>
+          </div>
+          <span class="counter-badge" id="countOtras">9 actividades</span>
+        </div>
+        <div id="gridOtras" class="cards-grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal de información detallada / Vista previa -->
+  <div id="infoModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-card">
+      <button id="closeModalBtn" class="modal-close" aria-label="Cerrar ventana">✕</button>
+      <div id="modalImage" class="modal-banner"></div>
+      <div class="modal-body">
+        <div class="modal-meta">
+          <span id="modalCategory" class="badge"></span>
+          <span id="modalType" class="badge badge-outline"></span>
+        </div>
+        <h3 id="modalTitle"></h3>
+        <p id="modalDescription"></p>
+        <div class="modal-objectives">
+          <h4>🎯 Temas y objetivos de aprendizaje:</h4>
+          <ul id="modalTopics"></ul>
+        </div>
+        <div class="modal-path">
+          <small>Ubicación / Enlace: <code id="modalPath"></code></small>
+        </div>
+        <div id="modalActions" class="modal-actions"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de contraseña para actividades protegidas (Portafolio) -->
+  <div id="pwModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="pwModalTitle">
+    <div class="modal-backdrop" id="pwBackdrop"></div>
+    <div class="modal-card" style="max-width: 430px;">
+      <button id="pwCloseBtn" class="modal-close" aria-label="Cerrar ventana">✕</button>
+      <div class="modal-body">
+        <div class="modal-meta">
+          <span class="badge badge-otras">🔒 Acceso Protegido</span>
+        </div>
+        <h3 id="pwModalTitle">Contraseña requerida</h3>
+        <p>Ingresa la clave de acceso para abrir <strong id="pwActivityName">Portafolio</strong>:</p>
+        <input
+          type="password"
+          id="pwInput"
+          placeholder="Escribe la contraseña..."
+          style="width: 100%; min-height: 44px; padding: 0.65rem 0.9rem; border: 1.5px solid #cbd5e1; border-radius: 9px; font-size: 1rem; margin-bottom: 0.65rem;"
+        />
+        <p id="pwError" class="hidden" style="color: #dc2626; font-size: 0.86rem; font-weight: 600; margin-bottom: 0.75rem;">
+          ❌ Contraseña incorrecta. Inténtalo de nuevo.
+        </p>
+        <div class="modal-actions">
+          <button id="pwOk" class="btn-primary otras-btn">Desbloquear y abrir →</button>
+          <button id="pwCancel" class="btn-secondary">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Visor Integrado de Actividades -->
+  <div id="activityViewer" class="activity-viewer hidden" role="dialog" aria-modal="true" aria-labelledby="viewerTitle">
+    <div class="viewer-topbar">
+      <div class="viewer-left">
+        <button id="viewerBackBtn" class="viewer-back-btn">
+          ← Volver al Menú Principal
+        </button>
+        <div class="viewer-info">
+          <span id="viewerCategory" class="viewer-badge"></span>
+          <strong id="viewerTitle">Actividad</strong>
+        </div>
+      </div>
+
+      <div class="viewer-right">
+        <span class="viewer-author">Autor: Enrique Erazo · 2026</span>
+        <button id="viewerToggleAnswersBtn" class="viewer-btn viewer-btn-answers hidden">
+          📝 Ver respuestas
+        </button>
+        <button id="viewerCompleteBtn" class="viewer-btn viewer-btn-check">
+          ○ Marcar como realizada
+        </button>
+        <a id="viewerExternalLink" href="#" target="_blank" rel="noopener noreferrer" class="viewer-btn viewer-btn-ext" title="Abrir en pestaña independiente">
+          ↗ Nueva pestaña
+        </a>
+      </div>
+    </div>
+
+    <div class="viewer-body">
+      <iframe
+        id="activityFrame"
+        src="about:blank"
+        title="Contenido de la actividad educativa"
+      ></iframe>
+    </div>
+  </div>
+
+  <!-- Pie de página permanente con autoría -->
+  <footer class="footer">
+    <div class="footer-container">
+      <p class="footer-main">
+        Portal Educativo Integrado · Educación Ambiental, Seguridad y Salud en el Trabajo (SST) y Proyectos Web
+      </p>
+      <p class="footer-author">
+        Autoría y desarrollo: <strong>Enrique Erazo</strong> · © <span id="footerYear">2026</span> · Todos los derechos reservados
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

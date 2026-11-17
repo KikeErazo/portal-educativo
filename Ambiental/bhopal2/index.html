@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concurso Bhopal</title>
+
+<link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+
+<h1>ACTIVIDAD - DESASTRE DE BHOPAL - INDIA - ENRIQUE ERAZO - 2026</h1>
+
+<div class="top">
+<input id="grupo" placeholder="Nombre del grupo">
+<button onclick="agregarGrupo()">Agregar grupo</button>
+</div>
+
+<div class="container">
+
+<div class="col">
+<h3>📋 Pregunta</h3>
+
+<div id="pregunta" class="pregunta"></div>
+
+<div id="timer">⏱ 03:00</div>
+
+<div id="respuestaBox" class="respuestaBox"></div>
+
+<button onclick="verRespuesta()">👁 Ver / Ocultar respuesta</button>
+
+<h3>Selecciona grupo que responde</h3>
+<div id="gruposBtns"></div>
+
+<h3>Calificar</h3>
+<button onclick="darPuntos(2)">✅ +2</button>
+<button onclick="darPuntos(1)">⚠ +1</button>
+<button onclick="darPuntos(0)">❌ 0</button>
+
+<br><br>
+<button onclick="siguiente()">➡ Siguiente</button>
+
+</div>
+
+<div class="col">
+<h3>🏆 Ranking</h3>
+<div id="ranking"></div>
+</div>
+
+</div>
+
+<footer>
+Todos los derechos reservados - Enrique Erazo - 2026
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>

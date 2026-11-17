@@ -1,0 +1,86 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+    margin-bottom: 20px; /* Añadido para separar el contenedor del pie de página */
+}
+
+.btn-grid {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn {
+    background-color: #aa633a;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.btn:hover {
+    background-color: #788032;
+}
+
+.hide {
+    display: none;
+}
+
+.next-btn {
+    margin-top: 20px;
+}
+
+#result-message {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+    width: 100%;
+    margin-top: 20px; /* Añadido para separar el pie de página del contenedor */
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+        padding: 15px;
+    }
+    .btn-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Estilos para tablets */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .container {
+        width: 85%;
+        padding: 20px;
+    }
+    .btn-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

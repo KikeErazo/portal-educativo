@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#5d4037" />
+  <title>Actividad SST — 20 Preguntas</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>Actividad de Preguntas — Generalidades SST - Enrique Erazo - 2026</h1>
+    <p class="subtitle">Crea grupos, saca preguntas, controla el tiempo, revela la respuesta y asigna puntos.</p>
+  </header>
+
+  <main class="container">
+    <!-- Panel izquierdo: grupos y control -->
+    <section class="panel panel-left">
+      <h2>Grupos</h2>
+      <form id="form-grupo" class="inline-form" autocomplete="off">
+        <label for="nombre-grupo" class="sr-only">Nombre del grupo</label>
+        <input id="nombre-grupo" type="text" placeholder="Nombre del grupo" />
+        <button type="submit" class="btn primary">Agregar</button>
+      </form>
+
+      <div id="contenedor-grupos" class="scoreboard">
+        <!-- Aquí se pintan los grupos con su puntaje -->
+      </div>
+
+      <div class="control-seleccion">
+        <label for="grupo-activo">Grupo activo</label>
+        <select id="grupo-activo"></select>
+      </div>
+
+      <div class="control-modo">
+        <span>Modo:</span>
+        <label class="radio">
+          <input type="radio" name="modo" value="aleatorio" checked />
+          Aleatorio
+        </label>
+        <label class="radio">
+          <input type="radio" name="modo" value="secuencial" />
+          Secuencial
+        </label>
+      </div>
+
+      <div class="control-botones">
+        <button id="btn-nueva-pregunta" class="btn accent">Nueva pregunta</button>
+        <button id="btn-nuevo-juego" class="btn danger">Nuevo juego</button>
+      </div>
+
+      <p class="estado">
+        <strong>Preguntas restantes:</strong>
+        <span id="restantes" class="restantes-big">20</span>
+        <span class="de">/ 20</span>
+      </p>
+
+      <div id="top3" class="top3 oculto" aria-live="polite">
+        <h3>🏆 Top 3</h3>
+        <ol id="lista-top3" class="lista-top3"></ol>
+      </div>
+
+      <p id="mensaje" class="mensaje" role="status" aria-live="polite"></p>
+    </section>
+
+    <!-- Panel derecho: pregunta, respuesta, calificación -->
+    <section class="panel panel-right">
+      <div class="tarjeta">
+        <div class="tarjeta-titulo">
+          <h2 id="titulo-pregunta">Pregunta</h2>
+          <span id="numero-pregunta" class="badge grande">—</span>
+        </div>
+
+        <!-- Iconos SST decorativos -->
+        <div class="iconos-sst" aria-hidden="true" title="Seguridad y Salud en el Trabajo">
+          <span class="icono">⛑️</span>
+          <span class="icono">🧯</span>
+          <span class="icono">⚠️</span>
+          <span class="icono">🦺</span>
+          <span class="icono">🧤</span>
+        </div>
+
+        <!-- Temporizador -->
+        <div class="temporizador" aria-live="polite">
+          <span class="label">Tiempo:</span>
+          <span id="tiempo" class="reloj">00:30</span>
+          <button id="btn-extra-tiempo" class="btn timer" disabled>+10s</button>
+        </div>
+
+        <p id="texto-pregunta" class="texto-grande">Presiona <strong>Nueva pregunta</strong> para iniciar.</p>
+
+        <div class="acciones">
+          <button id="btn-mostrar-respuesta" class="btn" disabled>Mostrar respuesta</button>
+        </div>
+
+        <div id="bloque-respuesta" class="respuesta oculto">
+          <h3>Respuesta oficial</h3>
+          <p id="texto-respuesta"></p>
+        </div>
+
+        <div class="calificacion">
+          <button id="btn-correcto" class="btn success" disabled>Correcto (+2)</button>
+          <button id="btn-parcial" class="btn warning" disabled>Parcial (+1)</button>
+          <button id="btn-incorrecto" class="btn secondary" disabled>Incorrecto (0)</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>- Enrique Erazo - Todos los derechos reservados - 2026 -</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+body{
+ margin:0;
+ font-family:Arial;
+ background:#fff1e6;
+ text-align:center;
+}
+
+/* TITULO */
+h1{
+ background:#ffb4a2;
+ color:#5a3e36;
+ padding:20px;
+}
+
+/* CONTENEDOR */
+.container{
+ display:flex;
+ flex-wrap:wrap;
+ justify-content:center;
+ gap:20px;
+ padding:20px;
+}
+
+/* COLUMNA */
+.col{
+ background:#ffe5d9;
+ width:320px;
+ padding:15px;
+ border-radius:12px;
+ box-shadow:0 5px 10px rgba(0,0,0,0.2);
+}
+
+/* PREGUNTA */
+.pregunta{
+ border:3px solid #f4a261;
+ padding:15px;
+ font-size:18px;
+ font-weight:bold;
+ border-radius:10px;
+}
+
+/* TIMER */
+#timer{
+ font-size:28px;
+ margin:10px;
+ color:#e76f51;
+ font-weight:bold;
+}
+
+/* RESPUESTA */
+.respuestaBox{
+ margin-top:10px;
+ padding:10px;
+ background:#ffd6c9;
+ display:none;
+ font-weight:bold;
+}
+
+/* BOTONES */
+button{
+ padding:10px;
+ border:none;
+ margin:5px;
+ border-radius:8px;
+ cursor:pointer;
+ background:#fb8500;
+ color:white;
+}
+
+button:hover{
+ background:#e76f51;
+}
+
+/* BOTONES GRUPOS */
+.grupoBtn{
+ display:block;
+ width:100%;
+ margin:5px 0;
+ padding:10px;
+ background:#ffafcc;
+}
+
+.activo{
+ background:#90dbf4 !important;
+ font-weight:bold;
+}
+
+/* RANKING */
+.item{
+ padding:8px;
+ margin:5px;
+ background:#fcd5ce;
+ border-radius:8px;
+}
+
+footer{
+ background:#ffb4a2;
+ color:#5a3e36;
+ padding:10px;
+}

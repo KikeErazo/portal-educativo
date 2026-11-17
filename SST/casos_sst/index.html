@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CASOS SST</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>CASOS SST - CONTRATISTAS Y EMPLEADOS</h1>
+        <div id="group-input">
+            <label for="group-name">Ingresa Nombre:</label>
+            <input type="text" id="group-name">
+            <button onclick="addGroup()">Agregar</button>
+        </div>
+        <div id="groups-container"></div>
+        <button id="start-button" onclick="startActivity()">Iniciar Actividad</button>
+        <div id="question-container" class="hidden">
+            <div id="question"><strong></strong></div>
+            <div id="timer">Tiempo restante: <span id="time">5:00</span> minutos</div>
+            <div class="button-container">
+                <button onclick="scorePoints(2)">Correcto (2 puntos)</button>
+                <button onclick="scorePoints(1)">Medio Punto (1 punto)</button>
+                <button onclick="scorePoints(0)">Incorrecto (0 puntos)</button>
+                <button onclick="nextGroup()">Sede el Turno</button>
+                <button onclick="showRandomQuestion()">Mostrar Pregunta Aleatoria</button>
+
+            </div>
+            <div class="navigation-buttons">
+                <button onclick="nextQuestion()">Pregunta</button>
+                <button onclick="previousQuestion()">Pregunta Anterior</button>
+                <button onclick="nextQuestion()">Siguiente Pregunta</button>
+            </div>
+            <button class="reset-button" onclick="resetActivity()">Reiniciar</button>
+        </div>
+
+        <div id="question"></div>
+        <div id="options"></div>
+        
+
+
+        <!-- Botón para ver respuestas -->
+        <button class="view-answers-button" onclick="window.open('respuestas.html', '_blank')">Ver Respuestas</button>
+    </div>
+    <footer>
+        Todos los derechos reservados - Enrique Erazo - Ecólogo - @2025
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

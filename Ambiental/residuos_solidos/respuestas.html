@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Respuestas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Respuestas</h1>
+        <div id="input-container">
+            <label for="question-number">Número de la pregunta:</label>
+            <input type="number" id="question-number" min="1" max="50">
+            <button onclick="showAnswer()">Mostrar Respuesta</button>
+        </div>
+        <div id="answer-container"></div>
+    </div>
+
+    <script>
+        const answers = [
+            "1. Residuos como recortes de plástico, piezas defectuosas, residuos de mantenimiento de maquinaria, embalajes y residuos de limpieza.",
+            "2. Clasificar los residuos es crucial para su manejo adecuado, minimizando riesgos para la salud y el medio ambiente.",
+            // ... (añade las 50 respuestas aquí)
+        ];
+
+        function showAnswer() {
+            const questionNumber = document.getElementById("question-number").value;
+            const answerContainer = document.getElementById("answer-container");
+            if (questionNumber >= 1 && questionNumber <= answers.length) {
+                answerContainer.innerHTML = `<strong>Pregunta ${questionNumber}:</strong><br>${answers[questionNumber - 1]}`;
+            } else {
+                answerContainer.innerHTML = "Número de pregunta inválido.";
+            }
+        }
+    </script>
+</body>

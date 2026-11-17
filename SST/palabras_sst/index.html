@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Actividad SST</title>
+
+
+    <style>
+        body {
+          background-image: url("fondo2.jpg");
+          background-size: cover; /* Ajusta la imagen al tamaño de la pantalla */
+          background-position: top; /* Centra la imagen */
+          background-repeat: no-repeat; /* Evita que se repita */
+          color: white; /* Cambia el color del texto si el fondo es oscuro */
+          font-family: Arial, sans-serif;
+        }
+      </style>
+    
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Actividad de Palabras <BR>Seguridad y Salud en el Trabajo - SST</h1>
+
+    <div id="group-entry">
+        <input type="text" id="group-name" placeholder="Nombre del grupo">
+        <button onclick="addGroup()">Agregar Grupo</button>
+    </div>
+
+    <div id="groups"></div>
+
+    <div id="game-panel">
+        <button onclick="startTurn()">PALABRA</button>
+
+
+
+        <div id="current-word" style="font-weight: bold; font-size: 24px;"></div>
+        <div id="current-definition" style="margin-top: 10px; font-style: italic;"></div>
+        <div id="timer"></div>
+        
+
+
+
+        <div id="current-word" style="margin-top: 20px; font-size: 24px; font-weight: bold;"></div>
+
+        <div id="mode-selection" style="margin-top: 10px;">
+            <button onclick="setMode('dibujar')">Dibujar</button>
+            <button onclick="setMode('adivinar')">Adivinar</button>
+        </div>
+
+        <div id="timer" style="margin-top: 10px; font-size: 20px; color: #ff4500;"></div>
+
+        <div style="margin-top: 10px;">
+            <button onclick="addPoint()">Sumar Punto</button>
+            <button onclick="nextGroup()">Siguiente Grupo</button>
+        </div>
+    </div>
+</div>
+<footer>
+    <B>Todos los derechos reservados - Enrique Erazo - Instructor SST - SENA @2025</B>
+</footer>
+<script src="definitions.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

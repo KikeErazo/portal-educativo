@@ -1,0 +1,118 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+#group-input, #question-container, #score-container {
+    margin-bottom: 20px;
+}
+
+#timer {
+    margin-top: 10px;
+}
+
+button {
+    background-color: #445677;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #73c8dd;
+}
+
+#groups-container {
+    margin-bottom: 20px;
+}
+
+.group {
+    margin-bottom: 10px;
+}
+
+.group-name {
+    display: inline-block;
+    width: 200px;
+}
+
+.active-group {
+    color: rgb(226, 29, 29);
+    font-weight: bold;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.navigation-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.reset-button {
+    background-color: #FF5733; /* Color diferente para el botón de reiniciar */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 10px;
+    margin: 20px auto;
+    display: block;
+}
+
+.reset-button:hover {
+    background-color: #E74C3C;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #f4f4f4;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    button {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .button-container, .navigation-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+}

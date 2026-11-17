@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0f172a" />
+  <title>Evaluación de Casos SST — por Grupos · Por Enrique Erazo 2026</title>
+  <!-- Asegúrate de tener el <link> real a tu CSS y el <script> real a tu JS -->
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="app-header" role="banner">
+    <div>
+      <h1>🦺 Evaluación de Casos SST — por Grupos</h1>
+      <div class="byline">Por Enrique Erazo 2026</div>
+    </div>
+    <nav class="header-actions">
+      <button id="btnNewRun" class="btn">➕ Nueva participación</button>
+      <button id="btnScoreboard" class="btn">📊 Scoreboard</button>
+      <button id="btnTeacherMode" class="btn">🎓 Modo docente</button>
+    </nav>
+    <div class="badges">
+      <span id="groupNameBadge" class="badge" aria-live="polite" title="Nombre del equipo"></span>
+      <span id="timerBadge" class="badge badge-timer" aria-live="polite" title="Tiempo restante">⏱ 00:00</span>
+      <span id="scoreBadge" class="badge" aria-live="polite" title="Puntaje actual">Puntaje: 0</span>
+      <span id="caseBadge" class="badge" aria-live="polite" title="Caso en curso">—</span>
+    </div>
+  </header>
+
+  <!-- Pantalla: Inicio / configuración -->
+  <main id="screenIntro" class="screen active">
+    <section class="card">
+      <h2>Activar grupo</h2>
+      <form id="introForm" class="intro-form" autocomplete="off">
+        <div class="form-row">
+          <label for="groupName">Nombre del grupo/equipo</label>
+          <input id="groupName" name="groupName" type="text" placeholder="Ej: Grupo A — Ficha 2567890" required />
+        </div>
+
+        <div class="form-row">
+          <label for="selectCase">Selecciona el caso para este grupo</label>
+          <select id="selectCase" required></select>
+          <label class="mini">
+            <!-- Por tu solicitud, por defecto DESACTIVADO -->
+            <input id="avoidRepeat" type="checkbox" />
+            Evitar repetir casos ya usados
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label for="timePerCaseMin">Tiempo por caso (minutos)</label>
+          <input id="timePerCaseMin" name="timePerCaseMin" type="number" min="1" max="60" step="1" value="3" required />
+        </div>
+
+        <div class="form-row inline">
+          <!-- Ayuda activada por defecto -->
+          <label><input type="checkbox" id="enableHints" checked /> Permitir ayuda (+1 min y posible penalización)</label>
+        </div>
+
+        <div class="form-row inline">
+          <label><input type="checkbox" id="enableTimeBonus" checked /> Activar bono por rapidez</label>
+          <label class="mini" for="bonusMax">Bono máximo (+ pts)</label>
+          <input id="bonusMax" type="number" min="0" max="5" step="0.5" value="2" style="max-width:100px" />
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn btn-primary">Cargar caso</button>
+        </div>
+      </form>
+
+      <details class="help">
+        <summary>¿Cómo se califica?</summary>
+        <ul>
+          <li><strong>Puntaje base (máx 14):</strong> Clasificación (2) + Riesgos (3) + Medidas (Fuente 3, Medio 3, Persona 3).</li>
+          <li><strong>Ayuda:</strong> muestra pista y añade +1 min. Si el base &gt; 0, aplica −10% al base (si base = 0, no descuenta).</li>
+          <li><strong>Bono por rapidez:</strong> <code>(t_rest/t_total) × bono_máx × (base_bruto/14)</code>. Si no aciertan nada, no hay bono.</li>
+        </ul>
+      </details>
+    </section>
+  </main>
+
+  <!-- Pantalla: Caso (lectura → luego iniciar) -->
+  <main id="screenCase" class="screen" aria-live="polite" aria-atomic="true">
+    <section class="card case-highlight">
+      <h2 id="caseTitle">🪖 Caso</h2>
+      <p id="caseDescription" class="case-description"></p>
+      <div class="actions">
+        <button id="btnExpandCase" class="btn">📰 Ampliar caso</button>
+        <div class="spacer"></div>
+        <button id="btnStartCase" class="btn btn-primary">▶️ Comenzar actividad</button>
+      </div>
+    </section>
+
+    <div id="questionsWrap" class="questions-wrap hidden">
+      <div class="grid-3">
+        <section class="card">
+          <h3>⚠️ 1) Clasificación del peligro</h3>
+          <select id="selectClasificacion" class="full-width" aria-label="Clasificación del peligro"></select>
+          <div id="feedbackClasificacion" class="feedback" aria-live="polite"></div>
+        </section>
+
+        <section class="card">
+          <h3>🧯 2) Riesgos asociados</h3>
+          <div id="risksOptions" class="options-list" role="group" aria-label="Riesgos asociados"></div>
+          <div id="feedbackRiesgos" class="feedback" aria-live="polite"></div>
+        </section>
+
+        <section class="card">
+          <h3>👷 3) Medidas de intervención</h3>
+          <div class="tabs">
+            <button class="tab active" data-tab="fuente" aria-selected="true">Fuente</button>
+            <button class="tab" data-tab="medio" aria-selected="false">Medio</button>
+            <button class="tab" data-tab="persona" aria-selected="false">Persona</button>
+          </div>
+          <div class="tab-panels">
+            <div id="panel-fuente" class="tab-panel active" role="group" aria-label="Medidas en la fuente"></div>
+            <div id="panel-medio" class="tab-panel" role="group" aria-label="Medidas en el medio"></div>
+            <div id="panel-persona" class="tab-panel" role="group" aria-label="Medidas en la persona"></div>
+          </div>
+          <div id="feedbackMedidas" class="feedback" aria-live="polite"></div>
+        </section>
+      </div>
+
+      <section class="actions">
+        <!-- 👇 Conmutador para ver/ocultar “Sugeridas:” -->
+        <label class="mini">
+          <input type="checkbox" id="toggleSuggestions" checked />
+          👀 Mostrar sugerencias (correctas que faltan)
+        </label>
+
+        <div class="spacer"></div>
+        <button id="btnHint" class="btn">💡 Ayuda (+1 min, −10% solo si aciertas)</button>
+        <button id="btnTeacherAddMin" class="btn hidden">+1 min (docente)</button>
+        <button id="btnTeacherAdd5Min" class="btn hidden">+5 min (docente)</button>
+        <button id="btnFinish" class="btn btn-primary">Finalizar y calificar</button>
+        <button id="btnCancel" class="btn">Cancelar</button>
+      </section>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- Sonido a 10s (puedes cambiar la fuente si quieres otro tono) -->
+    <audio id="beep" preload="auto">
+      <source src="" type="audio/mp3" />
+    </audio>
+  </main>
+
+  <!-- Pantalla: Scoreboard -->
+  <main id="screenScoreboard" class="screen">
+    <section class="card">
+      <h2>📊 Scoreboard — Resultados por grupo</h2>
+      <p id="scoreboardSummary" class="muted"></p>
+
+      <div id="podium" class="podium hidden">
+        <div class="podium-item gold">🥇 <span class="name"></span> <span class="score"></span></div>
+        <div class="podium-item silver">🥈 <span class="name"></span> <span class="score"></span></div>
+        <div class="podium-item bronze">🥉 <span class="name"></span> <span class="score"></span></div>
+      </div>
+
+      <div class="table-wrap">
+        <table id="scoreboardTable" class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Grupo</th>
+              <th>Caso</th>
+              <th>Base (0–14)</th>
+              <th>Bono tiempo</th>
+              <th>Final</th>
+              <th>Tiempo usado</th>
+              <th>Ayuda</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div class="actions">
+        <button id="btnDownloadCSV" class="btn">Descargar CSV</button>
+        <button id="btnResetBoard" class="btn">Reiniciar Scoreboard</button>
+        <div class="spacer"></div>
+        <!-- 👇 NUEVO: “cerrar” Scoreboard -->
+        <button id="btnCloseBoard" class="btn">⬅ Volver</button>
+        <button id="btnStartAnother" class="btn btn-primary">➕ Nueva participación</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Panel docente -->
+  <aside id="teacherPanel" class="teacher-panel" aria-live="polite" aria-atomic="true">
+    <h3>Panel docente</h3>
+    <div class="panel-row">
+      <button id="toggleKey" class="btn">👁️ Ver/Ocultar clave</button>
+      <button id="downloadKey" class="btn">Descargar gabarito</button>
+    </div>
+    <div class="panel-row">
+      <button id="panelAddMin" class="btn">+1 min (extender)</button>
+      <button id="panelAdd5Min" class="btn">+5 min (extender)</button>
+      <label class="mini"><input id="panelAvoidRepeat" type="checkbox" /> Evitar repetir casos</label>
+    </div>
+    <div class="panel-row">
+      <label class="mini"><input id="panelTimeBonus" type="checkbox" checked /> Bono por rapidez</label>
+      <label class="mini" for="panelBonusMax">Bono máx</label>
+      <input id="panelBonusMax" type="number" min="0" max="5" step="0.5" value="2" style="max-width:90px" />
+    </div>
+    <details>
+      <summary>Claves y explicación pedagógica</summary>
+      <pre id="answerKey" class="code"></pre>
+    </details>
+  </aside>
+
+  <!-- Modales -->
+  <div id="modalHint" class="modal">
+    <div class="modal-content">
+      <h3>💡 Pista del caso</h3>
+      <p id="modalHintText"></p>
+      <p class="muted">Se añadió <strong>+1 min</strong>. Si el puntaje base es > 0, se descontará <strong>−10%</strong>.</p>
+      <div class="actions">
+        <button class="btn btn-primary" data-close="modalHint">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="modalCase" class="modal">
+    <div class="modal-content">
+      <h3 id="modalCaseTitle">Caso</h3>
+      <p id="modalCaseText"></p>
+      <div class="actions">
+        <button class="btn btn-primary" data-close="modalCase">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="modalFeedback" class="modal">
+    <div class="modal-content large">
+      <h3>✅ Retroalimentación del caso</h3>
+      <div id="feedbackBody"></div>
+      <div class="actions">
+        <button id="btnSaveToBoard" class="btn btn-primary">Guardar en Scoreboard</button>
+        <button class="btn" data-close="modalFeedback">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confetti -->
+  <div id="confetti"></div>
+
+  <footer class="app-footer">
+    <div>Evaluación de Casos SST — por Grupos · Por Enrique Erazo 2026</div>
+  </footer>
+</body>
+</html>

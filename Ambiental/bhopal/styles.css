@@ -1,0 +1,136 @@
+:root {
+    --tierra: #A67C52;
+    --tierra-oscuro: #6F4E37;
+    --naranja-sst: #FF8C42;
+    --verde-ambiental: #4CAF50;
+    --gris: #f3f3f3;
+    --blanco: #ffffff;
+}
+
+body {
+    background: var(--gris);
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: var(--tierra-oscuro);
+    color: var(--blanco);
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 30px;
+}
+
+#setup, #finalScreen {
+    width: 90%;
+    max-width: 600px;
+    background: var(--blanco);
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: 2px solid var(--tierra);
+    border-radius: 8px;
+}
+
+button {
+    width: 100%;
+    background: var(--naranja-sst);
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    margin-top: 15px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: var(--tierra-oscuro);
+}
+
+.big-text {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+#panel {
+    display: none;
+    justify-content: space-between;
+    width: 95%;
+    margin: 20px auto;
+    padding: 15px;
+    background: var(--blanco);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.panel-right {
+    width: 40%;
+}
+
+#scoreList {
+    font-size: 22px;
+    padding-left: 20px;
+}
+
+#gameBoard {
+    width: 95%;
+    margin: 20px auto;
+    display: grid;
+    gap: 10px;
+}
+
+.card {
+    background: var(--tierra);
+    height: 110px;
+    border-radius: 10px;
+    color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 5px;
+    text-align: center;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.card.revealed {
+    color: white;
+    background: var(--verde-ambiental);
+}
+
+.card.matched {
+    background: var(--naranja-sst);
+    color: white;
+    cursor: default;
+}
+
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    background: var(--tierra-oscuro);
+    color: white;
+    font-size: 18px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 650px) {
+    .big-text {
+        font-size: 22px;
+    }
+    #scoreList { font-size: 18px; }
+    .card { height: 95px; }
+}

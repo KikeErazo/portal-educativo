@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego Ambiental</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Juego Ambiental</h1>
+        <div id="group-input">
+            <label for="group-name">Nombre del Grupo:</label>
+            <input type="text" id="group-name">
+            <button onclick="addGroup()">Agregar Grupo</button>
+        </div>
+        <div id="groups-container"></div>
+        <button id="start-button" onclick="startActivity()">Iniciar Actividad</button>
+        <div id="question-container" class="hidden">
+            <div id="question"><strong></strong></div>
+            <div id="timer">Tiempo restante: <span id="time">5:00</span> minutos</div>
+            <div class="button-container">
+                <button onclick="scorePoints(2)">Correcto (2 puntos)</button>
+                <button onclick="scorePoints(1)">Medio Punto (1 punto)</button>
+                <button onclick="scorePoints(0)">Incorrecto (0 puntos)</button>
+                <button onclick="nextGroup()">Sede el Turno</button>
+            </div>
+            <div class="navigation-buttons">
+                <button onclick="previousQuestion()">Pregunta Anterior</button>
+                <button onclick="nextQuestion()">Siguiente Pregunta</button>
+            </div>
+            <button class="reset-button" onclick="resetActivity()">Reiniciar Juego</button>
+        </div>
+
+    </div>
+    <footer>
+        Todos los derechos reservados - Enrique Erazo - Ecólogo - @2025
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Respuestas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Respuestas</h1>
+        <div id="input-container">
+            <label for="question-number">Número de la pregunta:</label>
+            <input type="number" id="question-number" min="1" max="50">
+            <button onclick="showAnswer()">Mostrar Respuesta</button>
+        </div>
+        <div id="answer-container"></div>
+        <button onclick="window.close()">Cerrar Pestaña</button>
+    </div>
+
+    <script>
+        const answers = [
+            "1. Tipos de residuos sólidos generados en la fabricación de productos plásticos por inyección y soplado:\n• Se generan residuos como recortes de plástico, piezas defectuosas, residuos de mantenimiento de maquinaria, embalajes y residuos de limpieza.",
+            "2. Importancia de clasificar los residuos sólidos en peligrosos y no peligrosos:\n• Clasificar los residuos es crucial para su manejo adecuado, minimizando riesgos para la salud y el medio ambiente. Los residuos peligrosos requieren tratamientos especiales para evitar la contaminación.",
+            "3. Métodos de almacenamiento temporal de residuos sólidos en la industria de plásticos:\n• Se utilizan contenedores etiquetados, áreas designadas y almacenamiento en condiciones que eviten la dispersión y contaminación. Los residuos peligrosos deben almacenarse en contenedores específicos y en áreas seguras.",
+            "4. Disposición final de los residuos sólidos no aprovechables:\n• La disposición final se realiza mediante rellenos sanitarios, incineración controlada o exportación a instalaciones autorizadas. Es importante seguir las normativas para evitar impactos ambientales negativos.",
+            "5. Normativas ambientales que regulan el manejo de residuos sólidos en Colombia:\n• Normativas como la Ley 99 de 1993, el Decreto 1076 de 2015 y la Resolución 1402 de 2006 regulan el manejo de residuos sólidos, estableciendo requisitos para su gestión adecuada.",
+            "6. Decreto Único Reglamentario del Sector Ambiente y Desarrollo Sostenible 1076 de 2015:\n• Este decreto establece disposiciones generales para la gestión ambiental, incluyendo el manejo de residuos sólidos, y busca promover el desarrollo sostenible y la protección del medio ambiente.",
+            "7. Contribución de la Ley 99 de 1993 a la gestión ambiental en Colombia:\n• La Ley 99 de 1993 crea el Ministerio de Ambiente y regula la gestión ambiental, promoviendo el desarrollo sostenible y estableciendo bases para la protección del medio ambiente.",
+            "8. Papel de la Autoridad Nacional de Licencias Ambientales (ANLA) en la regulación de residuos sólidos:\n• La ANLA regula y supervisa el cumplimiento de las normativas ambientales, incluyendo la gestión de residuos sólidos, y otorga licencias ambientales para actividades que puedan generar impactos.",
+            "9. Medidas para prevenir la contaminación ambiental por residuos plásticos:\n• Se deben implementar prácticas como la reducción en la fuente, reciclaje, tratamiento adecuado de residuos y educación ambiental para prevenir la contaminación.",
+            "10. Sistema Nacional Ambiental (SINA) y su relación con la gestión de residuos:\n• El SINA es el conjunto de entidades y normas que coordinan la gestión ambiental en Colombia, incluyendo la gestión de residuos, y busca garantizar la protección del medio ambiente.",
+            "11. Técnicas para reducir la cantidad de residuos sólidos generados en la industria de plásticos:\n• Técnicas como la optimización de procesos, reutilización de materiales, mejora en el diseño de productos y adopción de tecnologías limpias ayudan a reducir la generación de residuos.",
+            "12. Capacitación de los empleados en el manejo adecuado de residuos sólidos:\n• La capacitación se realiza mediante programas de formación continua sobre prácticas de manejo y disposición de residuos, incluyendo talleres, cursos y charlas informativas.",
+            "13. Impacto de la fabricación de productos plásticos en el medio ambiente:\n• La fabricación de productos plásticos impacta el medio ambiente a través de la generación de residuos, emisiones contaminantes y consumo de recursos naturales.",
+            "14. Estrategias para mejorar la gestión de residuos sólidos en la industria de plásticos:\n• Estrategias como la implementación de sistemas de reciclaje, adopción de tecnologías limpias, educación ambiental y cumplimiento de normativas ayudan a mejorar la gestión de residuos.",
+            "15. Recolección de residuos sólidos en la industria de plásticos:\n• La recolección se realiza mediante la segregación en la fuente y la recolección selectiva por parte de empresas especializadas, siguiendo protocolos de seguridad y normativas ambientales.",
+            "16. Economía circular y su aplicación en la gestión de residuos plásticos:\n• La economía circular busca mantener los productos y materiales en uso el mayor tiempo posible, reduciendo la generación de residuos y promoviendo el reciclaje y la reutilización.",
+            "17. Normativas específicas que regulan la disposición de residuos peligrosos en Colombia:\n• Normativas como el Decreto 4741 de 2005 y la Ley 1252 de 2008 regulan la disposición de residuos peligrosos, estableciendo requisitos para su manejo seguro y protección del medio ambiente.",
+            "18. Seguimiento y control de la gestión de residuos sólidos en la industria de plásticos:\n• El seguimiento y control se realiza mediante auditorías, inspecciones y reportes periódicos a las autoridades ambientales, asegurando el cumplimiento de las normativas.",
+            "19. Código Nacional de Recursos Naturales Renovables y de Protección al Medio Ambiente:\n• Este código establece las normas para la conservación y uso sostenible de los recursos naturales, incluyendo la gestión de residuos, y busca proteger el medio ambiente.",
+            "20. Acciones que pueden tomar las empresas para cumplir con la normatividad ambiental vigente en Colombia:\n• Las empresas pueden implementar sistemas de gestión ambiental, cumplir con las regulaciones, promover la responsabilidad ambiental y realizar auditorías internas para asegurar el cumplimiento.",
+            "21. Plan de Gestión Integral de Residuos Sólidos (PGIRS) y su aplicación en la industria de plásticos:\n• El PGIRS es un plan que establece las acciones para la gestión adecuada de residuos sólidos, incluyendo la reducción, reutilización, reciclaje y disposición final, y se aplica en la industria de plásticos para minimizar impactos ambientales.",
+"22. Segregación de residuos sólidos en la fuente:\n• La segregación se realiza clasificando los residuos en diferentes categorías (plásticos, papel, vidrio, orgánicos, peligrosos) desde el momento de su generación, facilitando su manejo y disposición adecuada.",
+"23. Resolución 1402 de 2006 y su regulación del manejo de residuos peligrosos:\n• La Resolución 1402 de 2006 regula el manejo de residuos peligrosos, estableciendo requisitos para su almacenamiento, transporte, tratamiento y disposición final, protegiendo la salud y el medio ambiente.",
+"24. Impacto de la disposición inadecuada de residuos sólidos en el medio ambiente:\n• La disposición inadecuada puede causar contaminación del suelo, agua y aire, afectar la biodiversidad, generar riesgos para la salud humana y contribuir al cambio climático.",
+"25. Tratamiento de residuos sólidos en la industria de plásticos:\n• El tratamiento incluye procesos como reciclaje, compostaje, incineración controlada y tratamiento químico, dependiendo del tipo de residuo y su peligrosidad.",
+"26. Ley 430 de 1998 y su contribución a la gestión de residuos peligrosos:\n• La Ley 430 de 1998 establece disposiciones para la gestión de residuos peligrosos, incluyendo su manejo, transporte y disposición, y busca proteger la salud y el medio ambiente.",
+"27. Medidas para garantizar la seguridad en el manejo de residuos peligrosos:\n• Medidas como el uso de equipos de protección personal, capacitación de empleados, almacenamiento adecuado y seguimiento de normativas garantizan la seguridad en el manejo de residuos peligrosos.",
+"28. Valorización de residuos sólidos en la industria de plásticos:\n• La valorización incluye procesos como reciclaje, recuperación de materiales y aprovechamiento energético, transformando los residuos en recursos útiles.",
+"29. Decreto 2811 de 1974 y su regulación de la gestión ambiental en Colombia:\n• El Decreto 2811 de 1974 establece las bases para la gestión ambiental en Colombia, incluyendo la conservación de recursos naturales y la regulación de actividades que puedan generar impactos ambientales.",
+"30. Acciones que pueden tomar las empresas para reducir la generación de residuos sólidos:\n• Acciones como la optimización de procesos, mejora en el diseño de productos, adopción de tecnologías limpias y promoción de prácticas sostenibles ayudan a reducir la generación de residuos.",
+"31. Gestión de residuos sólidos en el marco de la economía circular:\n• La gestión incluye la reutilización de materiales, reciclaje, diseño de productos duraderos y promoción de modelos de negocio sostenibles, manteniendo los recursos en uso el mayor tiempo posible.",
+"32. Resolución 472 de 2017 y su regulación de la gestión de residuos sólidos:\n• La Resolución 472 de 2017 establece disposiciones para la gestión integral de residuos sólidos, incluyendo su reducción, reutilización, reciclaje y disposición final, promoviendo prácticas sostenibles.",
+"33. Impacto de la gestión adecuada de residuos sólidos en la salud pública:\n• La gestión adecuada reduce riesgos de contaminación, previene enfermedades, mejora la calidad del aire y agua, y contribuye a un entorno más saludable.",
+"34. Registro de Generadores de Residuos o Desechos Peligrosos y su utilización:\n• Este registro permite identificar y controlar a los generadores de residuos peligrosos, facilitando la supervisión y asegurando el cumplimiento de las normativas.",
+"35. Auditoría ambiental en la gestión de residuos sólidos:\n• La auditoría ambiental evalúa el cumplimiento de las normativas y prácticas de gestión de residuos, identificando áreas de mejora y asegurando la protección del medio ambiente.",
+"36. Resolución 1362 de 2007 y su regulación de la gestión de residuos peligrosos:\n• La Resolución 1362 de 2007 establece los requisitos y el procedimiento para el Registro de Generadores de Residuos o Desechos Peligrosos, conforme a los artículos 27 y 28 del Decreto 4741 de 2005. Esta resolución busca normalizar y sistematizar la información sobre la generación y manejo de residuos peligrosos.",
+"37. Impacto del reciclaje de plásticos en la reducción de residuos sólidos:\n• El reciclaje de plásticos reduce significativamente la cantidad de residuos sólidos al transformar materiales desechados en nuevos productos. Esto disminuye la necesidad de recursos naturales, reduce las emisiones de gases de efecto invernadero y minimiza la contaminación ambiental.",
+"38. Gestión de residuos sólidos en pequeñas y medianas empresas de plásticos:\n• Las pequeñas y medianas empresas pueden implementar programas de reducción, reutilización y reciclaje de residuos, optimizar procesos de producción para minimizar desechos y colaborar con recicladores locales para mejorar la gestión de residuos plásticos.",
+"39. Protocolo de Kioto y su influencia en la gestión de residuos sólidos:\n• El Protocolo de Kioto, aunque principalmente enfocado en la reducción de emisiones de gases de efecto invernadero, también promueve prácticas sostenibles que incluyen la gestión adecuada de residuos sólidos para minimizar impactos ambientales y contribuir a la mitigación del cambio climático.",
+"40. Ley 1252 de 2008 y su regulación de la gestión de residuos peligrosos:\n• La Ley 1252 de 2008 establece normas prohibitivas en materia ambiental referentes a residuos y desechos peligrosos, regulando su importación, exportación, generación, almacenamiento y disposición final, con el objetivo de proteger la salud humana y el medio ambiente.",
+"41. Gestión de residuos sólidos en el contexto de la responsabilidad extendida del productor:\n• La responsabilidad extendida del productor (REP) implica que los fabricantes deben asumir la gestión de sus productos al final de su vida útil, promoviendo el diseño sostenible, la recolección y el reciclaje de residuos, y reduciendo la carga sobre los consumidores y el gobierno.",
+"42. Resolución 2184 de 2019 y su regulación de la gestión de residuos sólidos:\n• La Resolución 2184 de 2019 establece el código de colores para la separación de residuos sólidos, promoviendo el uso racional de bolsas plásticas y adoptando disposiciones para mejorar la gestión integral de residuos en Colombia.",
+"43. Impacto de la gestión de residuos sólidos en la biodiversidad:\n• La gestión adecuada de residuos sólidos es crucial para proteger la biodiversidad, evitando la contaminación de hábitats naturales, reduciendo la amenaza directa a la vida silvestre y preservando los ecosistemas.",
+"44. Gestión de residuos sólidos en el marco de la sostenibilidad empresarial:\n• Las empresas pueden implementar estrategias de gestión integral de residuos que incluyan la reducción, reutilización y reciclaje, optimizando procesos y cumpliendo con normativas ambientales, lo que mejora su reputación y contribuye a la sostenibilidad.",
+"45. Ley 1672 de 2013 y su regulación de la gestión de residuos de aparatos eléctricos y electrónicos:\n• La Ley 1672 de 2013 establece los lineamientos para la adopción de una política pública de gestión integral de residuos de aparatos eléctricos y electrónicos (RAEE), promoviendo la responsabilidad extendida del productor y la participación activa de todos los actores involucrados.",
+"46. Medidas para garantizar la trazabilidad de los residuos sólidos:\n• La trazabilidad de residuos sólidos se garantiza mediante sistemas de registro y seguimiento desde su generación hasta su disposición final, utilizando tecnologías como códigos de barras, RFID y plataformas digitales para asegurar la transparencia y el cumplimiento de normativas.",
+"47. Gestión de residuos sólidos en el contexto de la economía verde:\n• La economía verde promueve la gestión sostenible de residuos sólidos mediante la reducción, reutilización y reciclaje, incentivando prácticas que minimicen el impacto ambiental y fomenten el uso eficiente de recursos naturales.",
+"48. Resolución 1111 de 2018 y su regulación de la gestión de residuos sólidos:\n• La Resolución 1111 de 2018 establece disposiciones para la gestión integral de residuos sólidos, incluyendo la implementación de programas de reciclaje y la promoción de prácticas sostenibles en el manejo de residuos.",
+"49. Impacto de la gestión de residuos sólidos en la calidad del aire:\n• La gestión adecuada de residuos sólidos reduce la emisión de contaminantes y gases de efecto invernadero, mejorando la calidad del aire y contribuyendo a la mitigación del cambio climático.",
+"50. Gestión de residuos sólidos en el contexto de la transición energética:\n• La transición energética hacia fuentes renovables incluye la gestión sostenible de residuos sólidos, promoviendo la valorización energética de residuos y la reducción de desechos mediante tecnologías limpias y eficientes."
+        ];
+
+        function showAnswer() {
+            const questionNumber = document.getElementById("question-number").value;
+            const answerContainer = document.getElementById("answer-container");
+            if (questionNumber >= 1 && questionNumber <= answers.length) {
+                answerContainer.innerHTML = `<strong>Pregunta ${questionNumber}:</strong><br>${answers[questionNumber - 1]}`;
+            } else {
+                answerContainer.innerHTML = "Número de pregunta inválido.";
+            }
+        }
+    </script>
+</body>
+</html>

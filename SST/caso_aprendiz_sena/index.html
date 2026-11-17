@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ACTIVIDAD CASO APRENDIZ SENA - ENRIQUE ERAZO - 2026</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="title-group">
+      <!-- Icono casco SST -->
+      <svg class="icon helmet" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M8 40c0-13 11-24 24-24s24 11 24 24v4H8v-4z" fill="#ffb38a"/>
+        <path d="M26 20h12v8H26z" fill="#222"/>
+        <path d="M8 44h48v4H8z" fill="#ff6b6b"/>
+      </svg>
+      <h1>ACTIVIDAD CASO APRENDIZ SENA - ENRIQUE ERAZO - 2026</h1>
+    </div>
+    <div class="header-badges">
+      <!-- Iconos adicionales SST -->
+      <span class="badge">
+        <svg class="icon warn" viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M32 8L2 56h60L32 8z" fill="#ff9f43"/>
+          <rect x="30" y="24" width="4" height="18" fill="#222"/>
+          <rect x="30" y="46" width="4" height="4" fill="#222"/>
+        </svg>
+        SST
+      </span>
+      <span class="badge">
+        <svg class="icon extinguisher" viewBox="0 0 64 64" aria-hidden="true">
+          <rect x="22" y="16" width="20" height="30" rx="4" fill="#ff6b6b"/>
+          <rect x="28" y="20" width="8" height="6" fill="#fff"/>
+          <path d="M32 10c6 0 10 2 10 4h-6c0-1-2-2-4-2s-4 1-4 2h-6c0-2 4-4 10-4z" fill="#222"/>
+          <rect x="38" y="12" width="12" height="4" fill="#222"/>
+        </svg>
+        Extintor
+      </span>
+      <span class="badge">
+        <svg class="icon gloves" viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M14 18h10v26H14zM40 18h10v26H40z" fill="#ffb38a"/>
+          <path d="M24 18h6v26h-6zM34 18h6v26h-6z" fill="#222"/>
+        </svg>
+        EPP
+      </span>
+      <span class="badge">
+        <svg class="icon cone" viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M32 6l10 24H22L32 6z" fill="#ff6b6b"/>
+          <path d="M18 40h28l6 12H12l6-12z" fill="#ffb38a"/>
+          <rect x="10" y="52" width="44" height="6" fill="#222"/>
+        </svg>
+        Seguridad
+      </span>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <!-- Columna izquierda: Grupos y Puntuaciones -->
+    <aside class="left-panel">
+      <section class="panel card">
+        <h2>Grupos</h2>
+        <form id="groupForm" class="group-form" autocomplete="off">
+          <input type="text" id="groupName" placeholder="Nombre del grupo" aria-label="Nombre del grupo" />
+          <button type="submit" class="btn primary">Añadir</button>
+        </form>
+
+        <div id="groupsList" class="groups-list" aria-live="polite"></div>
+
+        <div class="score-controls">
+          <h3>Puntuación rápida</h3>
+          <div class="score-buttons">
+            <button class="btn score btn2" data-score="2" title="+2 puntos (Bien)">+2 Bien</button>
+            <button class="btn score btn1" data-score="1" title="+1 punto (Parcial)">+1 Parcial</button>
+            <button class="btn score btn0" data-score="0" title="0 puntos (No responde)">0 No responde</button>
+          </div>
+          <small class="hint">Selecciona un grupo para aplicar la puntuación. Al calificar, la siguiente pregunta quedará lista para iniciar.</small>
+        </div>
+      </section>
+
+      <section class="panel card">
+        <h2>Temporizador</h2>
+        <div class="timer-display" aria-live="polite">
+          <div id="timeLabel" class="time-label">03:00</div>
+          <div class="progress-wrap">
+            <div id="progressBar" class="progress-bar"></div>
+          </div>
+        </div>
+        <div class="timer-controls">
+          <div class="row gap">
+            <label>
+              Duración (min):
+              <input type="number" id="durationMinutes" min="1" step="0.5" value="3" />
+            </label>
+            <button id="addTimeBtn" class="btn soft" title="Añadir 30 segundos">+30s</button>
+          </div>
+          <div class="timer-buttons">
+            <button id="startRoundBtn" class="btn primary big">▶ Iniciar</button>
+            <button id="pauseBtn" class="btn">Pausar</button>
+            <button id="resetBtn" class="btn">Reiniciar</button>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="vibrateToggle" checked />
+            <span>Vibrar al final</span>
+          </label>
+        </div>
+      </section>
+    </aside>
+
+    <!-- Columna derecha: Preguntas, respuestas y controles -->
+    <section class="right-panel">
+      <section class="panel card question-card">
+        <div class="question-header">
+          <div class="q-meta">
+            <span id="qIndexLabel" class="q-index">Pregunta — / 13</span>
+            <span class="q-tag">Caso SST</span>
+          </div>
+          <div class="q-controls">
+            <div class="mode-switch">
+              <label class="segmented">
+                <input type="radio" name="mode" value="continua" checked />
+                <span>Continua</span>
+              </label>
+              <label class="segmented">
+                <input type="radio" name="mode" value="aleatoria" />
+                <span>Aleatoria</span>
+              </label>
+            </div>
+            <div class="q-nav">
+              <button id="prevBtn" class="btn" title="Anterior">Anterior</button>
+              <button id="randomBtn" class="btn soft" title="Aleatoria">Aleatoria</button>
+              <button id="nextBtn" class="btn" title="Siguiente">Siguiente</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tira de iconos decorativos SST -->
+        <div class="icon-strip">
+          <span class="chip">
+            <svg class="icon" viewBox="0 0 64 64"><rect x="20" y="18" width="24" height="28" rx="4" fill="#ff9f43"/><rect x="28" y="24" width="8" height="8" fill="#fff"/></svg>
+            Señalización
+          </span>
+          <span class="chip">
+            <svg class="icon" viewBox="0 0 64 64"><circle cx="32" cy="20" r="10" fill="#ff6b6b"/><rect x="28" y="28" width="8" height="18" fill="#222"/></svg>
+            Primeros auxilios
+          </span>
+          <span class="chip">
+            <svg class="icon" viewBox="0 0 64 64"><rect x="14" y="18" width="36" height="20" fill="#ffb38a"/><rect x="22" y="38" width="20" height="8" fill="#222"/></svg>
+            Barreras
+          </span>
+        </div>
+
+        <div id="roundStatus" class="round-status">
+          <strong>Ronda lista.</strong> Pulsa <em>Iniciar</em> para revelar la pregunta y empezar el tiempo.
+        </div>
+
+        <div id="questionText" class="question-text hidden">
+          <!-- Texto de la pregunta -->
+        </div>
+
+        <div class="answer-wrap">
+          <button id="toggleAnswerBtn" class="btn outline" disabled>Mostrar respuesta</button>
+          <div id="answerBox" class="answer-box" hidden>
+            <h3>Respuesta orientativa</h3>
+            <p id="answerText"></p>
+            <small class="note">
+              ✍️ <strong>Tip:</strong> Caso real aprendiz - SENA - Enrique Erazo - Instructor.
+            </small>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel card help-card">
+        <h2>Cómo se juega</h2>
+        <ol class="howto">
+          <li>Agrega los <strong>grupos</strong> y selecciónalos tocando su tarjeta.</li>
+          <li>El instructor define el <strong>modo</strong> (Continua/Aleatoria) y presiona <strong>Iniciar</strong>: se revela la pregunta y comienza <strong>3:00 min</strong> (ajustable).</li>
+          <li>El grupo responde. Asigna <strong>+2</strong> si está bien, <strong>+1</strong> si es parcial, o <strong>0</strong> si no responde.</li>
+          <li>Al <strong>calificar</strong>, la <strong>siguiente pregunta queda lista</strong>, y arrancará al pulsar <strong>Iniciar</strong> en la nueva ronda.</li>
+          <li>Usa <strong>Mostrar respuesta</strong> para reforzar el aprendizaje. Puedes <strong>extender tiempo</strong> con <strong>+30s</strong>.</li>
+        </ol>
+      </section>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <div class="footer-content">
+      <span>ENRIQUE ERAZO - 2026</span>
+      <span class="separator">•</span>
+      <span>Actividad lúdica de SST (SG-SST)</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
