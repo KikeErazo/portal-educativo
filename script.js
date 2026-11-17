@@ -478,6 +478,26 @@ const ACTIVITIES = [
     ],
     colors: ["#4338ca", "#6366f1"],
     icon: "📝"
+  },
+  {
+    id: "otras-10-portafolio-2026",
+    category: "Otras",
+    type: "Portafolio Actualizado · 2026",
+    folder: "kikeerazo.github.io/portafolioEnriquev2",
+    url: "https://kikeerazo.github.io/portafolioEnriquev2/",
+    requirePassword: true,
+    password: "76327133",
+    title: "10. Portafolio Profesional Actualizado (2026)",
+    shortDesc: "Hoja de vida actualizada a 2026, línea de tiempo (2002–2026), formación, competencias y catálogo completo de actividades.",
+    fullDesc:
+      "Versión actualizada del portafolio profesional de River Enrique Erazo Benítez (Ecólogo, Especialista en SGC, Instructor Ambiental y SST), con trayectoria certificada, cursos recientes y acceso directo a las aplicaciones educativas.",
+    topics: [
+      "Perfil profesional, experiencia SENA, DANE, COLNADE y ANEC",
+      "Línea de tiempo de avances (2002–2026) y certificaciones actualizadas",
+      "Acceso directo al portal unificado de actividades"
+    ],
+    colors: ["#064e3b", "#10b981"],
+    icon: "💼"
   }
 ];
 
