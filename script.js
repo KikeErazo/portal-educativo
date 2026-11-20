@@ -184,6 +184,24 @@ const ACTIVITIES = [
     colors: ["#991b1b", "#f87171"],
     icon: "🎮"
   },
+  {
+    id: "amb-residuos-3-reto",
+    category: "Ambiental",
+    type: "Simulador · Juego",
+    folder: "Ambiental/reto-residuos",
+    url: "./Ambiental/reto-residuos/index.html",
+    title: "Gestión Integral de Residuos Sólidos (Reto Interactivo)",
+    shortDesc: "Trivia competitiva con cronómetro en vivo y podio global: GTC 24, Res. 2184, GTC 86, Serie GTC 53, RESPEL y 9R.",
+    fullDesc:
+      "Desafío interactivo de 12 preguntas escalonadas sobre separación en la fuente (GTC 24 / Resolución 2184 de 2019), implementación (GTC 86), ecomapas, aprovechamiento (Serie GTC 53), gestión de residuos peligrosos (RESPEL) y Economía Circular (9R). Incluye comodines, cronómetro visual y tabla de posiciones sincronizada en tiempo real.",
+    topics: [
+      "Separación en la fuente (GTC 24 / Res. 2184 de 2019) y GTC 86",
+      "Ecomapas, cuantificación y aprovechamiento (Serie GTC 53)",
+      "Gestión de RESPEL, Convenio de Basilea, SGA y Economía Circular (9R)"
+    ],
+    colors: ["#065f46", "#fbbf24"],
+    icon: "🏆"
+  },
 
   // ======================== MÓDULO SST (7) ========================
   {
